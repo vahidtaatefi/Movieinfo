@@ -6,6 +6,14 @@ def lifecycle_version = "2.2.0"
 def koin_version = "2.1.3"
 def room_version = "2.2.5"
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Mr.Taatefi\\AndroidStudioProjects\\Movieinfo\\taatefi.jks')
+            storePassword '12344321'
+            keyAlias = 'taatefi'
+            keyPassword '12344321'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -21,8 +29,13 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

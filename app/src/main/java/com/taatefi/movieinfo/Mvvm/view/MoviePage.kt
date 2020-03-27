@@ -2,14 +2,16 @@ package com.taatefi.movieinfo.Mvvm.view
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.BitmapFactory.*
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.BitmapFactory.decodeResource
+import android.graphics.BitmapFactory.decodeStream
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.taatefi.movieinfo.Mvvm.viewmodel.viewmodelmovie
 import com.taatefi.movieinfo.MyLib.MyLib
-import com.taatefi.movieinfo.R
 import com.taatefi.movieinfo.MyLib.movierecycleradapter
+import com.taatefi.movieinfo.R
 import com.taatefi.movieinfo.Retrofit.themovieresponsemodel
 import com.taatefi.movieinfo.RoomDb.AppDatabase
 import com.taatefi.movieinfo.RoomDb.Movieinf
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_movie_page.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.net.URL
 import kotlin.math.pow
+
 
 class MoviePage : AppCompatActivity() {
     lateinit var json: themovieresponsemodel
@@ -35,11 +38,18 @@ class MoviePage : AppCompatActivity() {
         }
         btnsave.setOnClickListener() {
             AppDatabase.getInstance(this)
-            var url = URL("http://image.tmdb.org/t/p/w300/" + json.results[0].backdrop_path)
-            var bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-            val btosbackpro=my.BitMapToString(bmp)
+            var bmp: Bitmap?
+            if (json.results[0].backdrop_path!=null) {
+                var url = URL("http://image.tmdb.org/t/p/w300/" + json.results[0].backdrop_path)
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            }else
+            {
+                bmp = decodeResource(this.getResources(),R.drawable.movie)
+            }
+            val btosbackpro = my.BitMapToString(bmp)
             val movieinf = Movieinf(0,json.results[0].title,btosbackpro)
             vm.savemoviedata(this, movieinf)
+            Toast.makeText(applicationContext,"دخیره شد",Toast.LENGTH_SHORT).show()
         }
         val mylib = MyLib()
         var url: URL
