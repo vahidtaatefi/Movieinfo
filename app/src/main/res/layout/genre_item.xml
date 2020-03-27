@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:background="@color/colorAccent"
             android:textColor="@color/red"
-            android:textSize="16dp"
+            android:textSize="19dp"
             android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="600px"
             android:background="@drawable/movie"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/txttittle"

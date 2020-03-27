@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
-        appDatabase = AppDatabase.getInstance(this)
+      StrictMode.setThreadPolicy(policy)
+     //   appDatabase = AppDatabase.getInstance(this)
 
         //    val moviedao = appDatabase?.movieDao()
         //   moviedao?.deleteAll()
